@@ -22,8 +22,8 @@ model = NeuralNetworkNet()
 loss_fn = nn.BCELoss()  # binary cross entropy
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-numEpochs = 10
-batch_size = 10
+numEpochs = 30
+batch_size = 32
 
 for epoch in range(numEpochs):
 	print(f"epoch {epoch}")
@@ -37,30 +37,46 @@ for epoch in range(numEpochs):
 		loss.backward()
 		optimizer.step()
 
-testInput = torch.empty(0, 29)
-testOutput = torch.empty(0, 1)
+testInput: torch.Tensor = torch.empty(0)
+testOutput: torch.Tensor = torch.empty(0)
+# testOutput = testOutput.unsqueeze(0)
 
 #separate input and output in batches
 for batchInput, batchOutput in testDataLoader:
-	# print(testInput)
-	# print(batchInput)
+	#print(batchInput.size())
 
-	print(testOutput)
-	print(batchOutput)
-
-	testInput = torch.cat((testInput, batchInput.unsqueeze(0)), dim=0)
+	testInput = torch.cat((testInput, batchInput), dim=0)
 	testOutput = torch.cat((testOutput, batchOutput.unsqueeze(0)), dim=0)
+
+testInput = testInput.reshape(testInput.size()[0] // 29, 29)
 
 #predict values with testing data input
 yPred = model(testInput)
 
-#Calculate Mean Absolute Error (MAE)
-mae = torch.abs(yPred - testOutput).mean()
+# #Calculate Mean Absolute Error (MAE)
+# mae = torch.abs(yPred - testOutput).mean()
+#
+# #Calculate Coefficient of Determination (r^2)
+# sumOfSquaresOfResiduals = torch.sum(torch.square(yPred - testOutput))
+# sumOfSquaresTotal = torch.sum(torch.square(testOutput - torch.mean(testOutput)))
+# r2 = 1 - (sumOfSquaresOfResiduals / sumOfSquaresTotal)
+#
+# print(f"MAE {mae}")
+# print(f"r2 {r2}")
 
-#Calculate Coefficient of Determination (r^2)
-sumOfSquaresOfResiduals = torch.sum(torch.square(yPred - testOutput))
-sumOfSquaresTotal = torch.sum(torch.square(testOutput - torch.mean(testOutput)))
-r2 = 1 - (sumOfSquaresOfResiduals / sumOfSquaresTotal)
+threshold = 0.5  # Adjust the threshold based on your requirements
 
-print(f"MAE {mae}")
-print(f"r2 {r2}")
+# Convert predicted probabilities to binary predictions
+binary_predictions = (yPred >= threshold).int()
+
+# Convert binary_predictions to float
+binary_predictions = binary_predictions.float().view(-1)
+testOutput = testOutput.view(-1)
+
+print(binary_predictions)
+print(testOutput)
+
+# Calculate accuracy
+accuracy = (binary_predictions == testOutput).float().mean()
+
+print(f"Accuracy: {accuracy.item()}")
