@@ -1,5 +1,5 @@
 # YSP_PythonB_Project
-Team: Matthew Cai (Nightxade) and Rohil Agarwal (rohilvagarwal)\n
+Team: Matthew Cai (Nightxade) and Rohil Agarwal (rohilvagarwal)
 Research Question: Can a Deep Neural Network (DNN) effectively classify breast cancer from described
 features of digitized images of a fine needle aspirate (FNA), improving the accuracy and efficiency of
 breast cancer diagnosis?
