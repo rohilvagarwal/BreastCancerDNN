@@ -47,4 +47,8 @@ Main function for running the program
 1. Import necessary packages and classes
 2. Import data
 3. Preprocess data with PreProcessData class
-4. 
+4. Load data with DNNDataLoader class
+5. Set epoch and batch size
+6. Train model
+7. Separate test input and output
+8. Calculate and output final model accuracy with test dataset
