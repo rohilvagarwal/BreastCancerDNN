@@ -42,13 +42,18 @@ __init__ ==> constructor creates the following layers
 
 __forward__ ==> implements torch.nn.Module forward method that enables model training and testing -- simply uses the layers in sequence
 
+## correlations.py
+Maps out correlations between data categories using torch.corrcoef() and matplotlib.pyplot.imshow(0
+
 ## main.py
 Main function for running the program
 1. Import necessary packages and classes
 2. Import data
 3. Preprocess data with PreProcessData class
 4. Load data with DNNDataLoader class
-5. Set epoch and batch size
-6. Train model
-7. Separate test input and output
-8. Calculate and output final model accuracy with test dataset
+5. Separate test input and output
+6. Set epoch and batch size
+7. Train model
+8. Test model after each epoch and append accuracy to list
+9. Calculate and output final model accuracy with test dataset
+10. Graph model accuracy over epochs using the list from Step 8
