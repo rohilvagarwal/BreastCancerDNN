@@ -6,4 +6,4 @@
 **Dataset:** Breast Cancer Diagnosis, https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic  
 **Data Considerations:** (1) The ID category should not be considered in the model. (2) Target category has a range of 2 values -- use binary classification (Sigmoid function for last neuron, Binary Cross Entropy Loss, 1 neuron for output). (3) All relevant features are continuous instead of categorical.  
 **Results:** (1) Model performance with testing dataset results in a greater than 90% chance of a correct diagnosis.  
-**Github Repository:** https://github.com/rohilvagarwal/YSP_PythonB_Project  
+**Github Repository:** https://github.com/rohilvagarwal/BreastCancerDNN
