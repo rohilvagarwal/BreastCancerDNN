@@ -42,6 +42,7 @@ testInput = testInput.reshape(testInput.size()[0] // 29, 29)
 
 # simulate epochs
 testAccuracies = []
+testLosses = []
 for epoch in range(numEpochs):
 	print(f"epoch {epoch + 1}")
 	for i, (xBatch, yBatch) in enumerate(trainDataLoader):
@@ -73,6 +74,10 @@ for epoch in range(numEpochs):
 	# Calculate accuracy
 	accuracy = (binary_predictions == testOutput).float().mean()
 	testAccuracies.append(accuracy.item() * 100)
+
+	# Calculate loss
+	loss = loss_fn(yPred.squeeze(), testOutput.squeeze())
+	testLosses.append(loss.detach().numpy())
 
 # print(testAccuracies)
 
@@ -111,5 +116,13 @@ plt.plot(np.arange(1, numEpochs+1), testAccuracies)
 plt.title("Test Accuracy over Epochs")
 plt.xlabel("Epochs")
 plt.ylabel("Test Accuracy")
-plt.ylim(50, 100)
+plt.ylim(0, 100)
+plt.show()
+
+# plot test loss
+plt.plot(np.arange(1, numEpochs+1), testLosses)
+plt.title("Test Loss over Epochs")
+plt.xlabel("Epochs")
+plt.ylabel("Test Loss")
+plt.ylim(0, 1)
 plt.show()
