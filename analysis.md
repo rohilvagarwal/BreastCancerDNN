@@ -54,6 +54,6 @@ Main function for running the program
 5. Separate test input and output
 6. Set epoch and batch size
 7. Train model
-8. Test model after each epoch and append accuracy to list
+8. Test model after each epoch and append accuracy and losses to lists
 9. Calculate and output final model accuracy with test dataset
-10. Graph model accuracy over epochs using the list from Step 8
+10. Graph model accuracy and losses over epochs using the lists from Step 8
